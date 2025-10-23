@@ -3,13 +3,13 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-
+#Chuẩn bị dữ liệu
 text = "hello world. this is transformer demo."
 chars = sorted(list(set(text)))
 stoi = {ch: i for i, ch in enumerate(chars)}
 itos = {i: ch for ch, i in stoi.items()}
 
-def encode(s): return [stoi[c] for c in s]
+def encode(s): return [stoi[c] for c in s]  #chuyển chuỗi thành vector số 
 def decode(l): return ''.join([itos[i] for i in l])
 
 data = torch.tensor(encode(text), dtype=torch.long)
@@ -73,3 +73,4 @@ for _ in range(50):
     next_char = torch.multinomial(probs, num_samples=1)
     context = torch.cat((context, next_char), dim=1)
 print("Sinh chuỗi:", decode(context[0].tolist()))
+
